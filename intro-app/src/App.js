@@ -11,18 +11,20 @@ class App extends Component {
       {name:"Abdul", age:21},
       {name:"Waheed", age:22},
       {name:"Mac", age:20}
-    ]
+    ],
+    otherState:"this is some other state",
+    showPersons:true
   }
 
-  switchNameHandler =(newName)=>{
-    // console.log('was clicked')
-    // this.state.persons[0].name="Robert"  this will not work to change the state see below
-    this.setState({persons : [
-      {name:newName, age:21},
-      {name:"Viola", age:22},
-      {name:"Max", age:20}
-    ]})
-  }
+  // switchNameHandler =(newName)=>{
+  //   // console.log('was clicked')
+  //   // this.state.persons[0].name="Robert"  this will not work to change the state see below
+  //   this.setState({persons : [
+  //     {name:newName, age:21},
+  //     {name:"Viola", age:22},
+  //     {name:"Max", age:20}
+  //   ]})
+  // }
 
   changeNameHandler =(event) =>{
     this.setState({persons : [
@@ -32,8 +34,54 @@ class App extends Component {
       ]})
   }
 
+  togglePersonsHandler = (props) =>{
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons:!doesShow})
+  }
+
+  deletePersonHandler = (personIndex) => {
+    // get the persons data
+    console.log(1)
+    const persons = this.state.persons
+    persons.splice(personIndex, 1)
+    console.log(persons)
+    this.setState({persons:persons})
+  }
+
+  test =()=>{
+    console.log('hello world')
+  }
   render() {
-    //   inline css applied on button
+
+
+    let persons = null
+    // console.log(this.state.showPersons)
+    if (this.state.showPersons){
+      persons=(
+        <div>
+          {/* this code is JavaScript alternative of below code snippets written in JSX */}
+          {this.state.persons.map((person, index) => {
+            return <Person
+              click={() =>this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age}
+              ></Person>
+          })}
+          {/* <Person
+          name={this.state.persons[0].name }
+          age={this.state.persons[0].age }></Person>
+          <Person
+            name={this.state.persons[1].name }
+            age={this.state.persons[1].age }
+            change={this.changeNameHandler}>I love football</Person>
+          <Person
+            name={this.state.persons[2].name }
+            age={this.state.persons[2].age }
+            click={() => this.switchNameHandler('Abdul')}></Person> */}
+        </div>
+      );
+    }
+    //inline css applied on button
     const style ={
         backgroundColor:'green',
         border:'4px solid blue',
@@ -44,28 +92,10 @@ class App extends Component {
     }
     return (
       <div className='App'>
-        <div >
-        <h1>I am react</h1>
-        <p>This app is working</p>
-        <p>Hello there</p>
-      </div>
-      <div>
-        <p>I am new Component</p>
-      </div>
-      <button 
-        onClick={() => this.switchNameHandler('Trash')}
-        style={style}>Switch Name</button>
-      <Person
-        name={this.state.persons[0].name }
-        age={this.state.persons[0].age }></Person>
-      <Person
-        name={this.state.persons[1].name }
-        age={this.state.persons[1].age }
-        change={this.changeNameHandler}>I love football</Person>
-      <Person
-        name={this.state.persons[2].name }
-        age={this.state.persons[2].age }
-        click={() => this.switchNameHandler('Abdul')}></Person>
+      <button
+        onClick={this.test}
+        style={style}>Toggle Name</button>
+        {persons}
       </div>
     );
   }
