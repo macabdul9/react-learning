@@ -5,7 +5,7 @@ import './App.css';
 // Import our own component
 import Person from './Person/Person'
 
-import Radium, {StyleRoot} from 'radium'
+// import Radium, {StyleRoot} from 'radium'
 
 class App extends Component {
   // states
@@ -86,10 +86,10 @@ class App extends Component {
       font:'inherit',
       padding:'8px',
       cursor:'pointer',
-      ':hover':{
-        backgroundColor:'lightgreen',
-        color:'black'
-      }
+      // ':hover':{
+      //   backgroundColor:'lightgreen',
+      //   color:'black'
+      // }
     }
 
     let persons = null
@@ -122,10 +122,11 @@ class App extends Component {
         </div>
       );
       style.backgroundColor="red";
-      style[':hover']={
-        backgroundColor:'salmon',
-        color:'black'
-      }
+
+      // style[':hover']={
+      //   backgroundColor:'salmon',
+      //   color:'black'
+      // }
     }
 
     // Applying dynamic classes
@@ -140,7 +141,7 @@ class App extends Component {
 
     return (
       //  It is required to wrap it into StyleRoot to work with media query
-      <StyleRoot>
+      // <StyleRoot>
         <div className='App'>
           <button
             onClick={this.togglePersonsHandler}
@@ -148,8 +149,9 @@ class App extends Component {
           <p className={classes.join(' ')}>Hi, I am react App</p>
           {persons}
         </div>
-      </StyleRoot>
+      // {/* </StyleRoot> */}
     );
   }
 }
-export default Radium(App);
+// export default Radium(App);
+export default App;
