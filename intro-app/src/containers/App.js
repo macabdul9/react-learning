@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from '../logo.svg';
 import './App.css';
 
 // Import our own component
-import Person from './Person/Person'
+import Person from '../components/Persons/Person/Person'
 
 // import Radium, {StyleRoot} from 'radium'
 
@@ -18,7 +18,6 @@ class App extends Component {
     otherState:"this is some other state",
     showPersons:true
   }
-
   // switchNameHandler =(newName)=>{
   //   // console.log('was clicked')
   //   // this.state.persons[0].name="Robert"  this will not work to change the state see below
