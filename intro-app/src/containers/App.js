@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+import Radium, {StyleRoot} from 'radium';
+
 import './App.css';
-
-// Import our own component
-import Person from '../components/Persons/Person/Person'
-
-// import Radium, {StyleRoot} from 'radium'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
   // states
@@ -78,18 +76,6 @@ class App extends Component {
   }
   render() {
 
-     //inline css applied on button
-     const style ={
-      backgroundColor:'green',
-      border:'2px solid blue',
-      font:'inherit',
-      padding:'8px',
-      cursor:'pointer',
-      // ':hover':{
-      //   backgroundColor:'lightgreen',
-      //   color:'black'
-      // }
-    }
 
     let persons = null
 
@@ -97,60 +83,34 @@ class App extends Component {
     if (this.state.showPersons){
       persons=(
         <div>
-          {/* this code is JavaScript alternative of below code snippets written in JSX */}
-          {this.state.persons.map((person, index) => {
-            return <Person
-              click={() =>this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              change={(event)=>this.nameChangeHandler(event, person.id)}
-              ></Person>
-          })}
-         {/* <Person
-          name={this.state.persons[0].name }
-          age={this.state.persons[0].age }></Person>
-          <Person
-            name={this.state.persons[1].name }
-            age={this.state.persons[1].age }
-            change={this.nameChangeHandler}>I love football</Person>
-          <Person
-            name={this.state.persons[2].name }
-            age={this.state.persons[2].age }
-            click={() => this.switchNameHandler('Abdul')}></Person> */}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangeHandler}
+            />
         </div>
       );
-      style.backgroundColor="red";
-
-      // style[':hover']={
-      //   backgroundColor:'salmon',
-      //   color:'black'
-      // }
+     
     }
-
-    // Applying dynamic classes
-    let classes = []
-    let len = this.state.persons.length
-    if(len <=2){
-      classes.push('red'); // red class
-    }
-    if(len <= 1){
-      classes.push('bold') // red, bold classes
-    }
+    console.log(this.props.title)
 
     return (
       //  It is required to wrap it into StyleRoot to work with media query
-      // <StyleRoot>
+      <StyleRoot>
         <div className='App'>
-          <button
-            onClick={this.togglePersonsHandler}
-            style={style}>Toggle Name</button>
-          <p className={classes.join(' ')}>Hi, I am react App</p>
+          <Cockpit 
+            persons={this.state.persons} 
+            clicked={this.togglePersonsHandler}
+            showPersons={this.state.showPersons}>
+          </Cockpit>
           {persons}
         </div>
-      // {/* </StyleRoot> */}
+      </StyleRoot>
     );
   }
 }
-// export default Radium(App);
-export default App;
+
+// class bases component is used for state management
+// functional component for component management
+export default Radium(App);
+// export default App;
