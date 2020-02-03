@@ -20,6 +20,16 @@ class Persons extends React.Component{
   // componentDidUpdate(){
   //   console.log('[Persons.js] componentDidUpdate')
   // }
+  shouldComponentUpdate(nextProps, nextState){
+    if(nextProps.persons!==this.props.persons){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  componentWillUnmount(){
+    console.log('[Persons.js] componentWillUnmount')
+  }
 
   render(){
     console.log('[Persons.js] rendering...')

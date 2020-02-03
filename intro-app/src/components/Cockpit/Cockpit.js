@@ -22,7 +22,7 @@ const cockpit = function Cockpit(props){
 
     // Applying dynamic classes
     let classes = []
-    let len = props.persons.length
+    let len = props.personsLength
     if(len <=2){
         classes.push('red'); // red class
     }
@@ -54,10 +54,10 @@ const cockpit = function Cockpit(props){
 
     return (
        <div>
-           <button
-            onClick={props.clicked}
-            style={style}>Toggle Name</button>
-          <p className={classes.join(' ')}>Hi, I am react App</p>
+          <h3 className={classes.join(' ')}>Person Manager</h3>
+          <button
+          onClick={props.clicked}
+          style={style}>Toggle Name</button>
        </div>
     );
 }

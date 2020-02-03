@@ -3,7 +3,7 @@ import Radium, {StyleRoot} from 'radium';
 
 import './App.css';
 import Persons from '../components/Persons/Persons';
-import Cockpit from '../components/Cockpit/Cockpit'
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
@@ -20,7 +20,8 @@ class App extends Component {
       {id:"sdtghre", name:"Mac", age:20}
     ],
     otherState:"this is some other state",
-    showPersons:false
+    showPersons:false,
+    showCockpit:true
   }
 
   static getDerivedStateFromProps(props, state){
@@ -34,6 +35,7 @@ class App extends Component {
   componentDidMount(){
     console.log('[App.js] componentDidMount')
   }
+
   switchNameHandler =(newName)=>{
     // console.log('was clicked')
     // this.state.persons[0].name="Robert"  this will not work to change the state see below
@@ -117,11 +119,14 @@ class App extends Component {
       //  It is required to wrap it into StyleRoot to work with media query
       <StyleRoot>
         <div className='App'>
-          <Cockpit 
-            persons={this.state.persons} 
-            clicked={this.togglePersonsHandler}
-            showPersons={this.state.showPersons}>
-          </Cockpit>
+          <button onClick={()=>{this.setState({showCockpit:!this.state.showCockpit})}}>Remove Cockpit</button>
+          {this.state.showCockpit?
+            <Cockpit 
+              personsLength={this.state.persons.length} 
+              clicked={this.togglePersonsHandler}
+              showPersons={this.state.showPersons}>
+            </Cockpit>
+          :null}
           {persons}
         </div>
       </StyleRoot>

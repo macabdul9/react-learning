@@ -18,7 +18,6 @@ class Person extends React.Component {
         <div className="Person" style={style}>
             <h1 onClick={this.props.click}>I am {this.props.name}, I am {this.props.age} years old </h1>
             <p>{this.props.children}</p>
-            {/* this is call two way binding */}
             <input type='text'  onChange={this.props.change} value={this.props.name}/>
         </div>
     )
