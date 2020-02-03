@@ -6,7 +6,13 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
-  // states
+
+  // constructor
+  constructor(props){
+    super(props);
+    console.log('[App.js] constructor')
+  }
+  // states, which can be intiized using state
   state = {
     persons : [
       {id:"jkfv", name:"Waheed", age:22},
@@ -14,24 +20,36 @@ class App extends Component {
       {id:"sdtghre", name:"Mac", age:20}
     ],
     otherState:"this is some other state",
-    showPersons:true
+    showPersons:false
   }
-  // switchNameHandler =(newName)=>{
-  //   // console.log('was clicked')
-  //   // this.state.persons[0].name="Robert"  this will not work to change the state see below
-  //   this.setState({persons : [
-  //     {name:newName, age:21},
-  //     {name:"Viola", age:22},
-  //     {name:"Max", age:20}
-  //   ]})
-  // }
+
+  static getDerivedStateFromProps(props, state){
+    console.log('[App.js] getDerivedStateFromProps', props)
+    return state
+  }
+
+  componentWillMount(){
+    console.log('[App.js] componentWillMount')
+  }
+  componentDidMount(){
+    console.log('[App.js] componentDidMount')
+  }
+  switchNameHandler =(newName)=>{
+    // console.log('was clicked')
+    // this.state.persons[0].name="Robert"  this will not work to change the state see below
+    this.setState({persons : [
+      {name:newName, age:21},
+      {name:"Viola", age:22},
+      {name:"Max", age:20}
+    ]})
+  }
 
   nameChangeHandler = (event, id) =>{
 
     // get the index of the id
     const personIndex = this.state.persons.findIndex(p=>{
       return p.id===id
-    })
+    });
 
     // get the person
     //  we don't want to mutate the state directly that's why destructuring
@@ -76,6 +94,7 @@ class App extends Component {
   }
   render() {
 
+    console.log('[App.js] render')
 
     let persons = null
 

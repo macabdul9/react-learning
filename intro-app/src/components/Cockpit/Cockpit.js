@@ -3,8 +3,24 @@ import Radium from 'radium'
 import './Cockpit.css'
 
 
-const cockpit = (props) => {
-     // Applying dynamic classes
+const cockpit = function Cockpit(props){
+
+  // React.useEffect(() => {
+  //   console.log('[Cockpit..js] useEffect')
+  //   // http request
+  //   setTimeout(()=>{
+  //     alert('data saved to cloud')
+  //   }, 1000)
+  // }, props.persons)
+
+  React.useEffect(() => {
+    console.log('[Cockpit.js] useEffect')
+    setTimeout(()=>{
+      alert('data saved into cloud')
+    }, 1)
+  }, [props.persons])
+
+    // Applying dynamic classes
     let classes = []
     let len = props.persons.length
     if(len <=2){

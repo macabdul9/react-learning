@@ -3,7 +3,10 @@ import React from 'react';
 import './Person.css'
 import Radium from 'radium';
 
-const person = (props) =>{
+class Person extends React.Component {
+
+   render(){
+    console.log('[Person.js] rendering...')
     // adding media query
     const style = {
         '@media (min-width: 500px)':{
@@ -13,13 +16,14 @@ const person = (props) =>{
 
     return (
         <div className="Person" style={style}>
-            <h1 onClick={props.click}>I am {props.name}, I am {props.age} years old </h1>
-            <p>{props.children}</p>
+            <h1 onClick={this.props.click}>I am {this.props.name}, I am {this.props.age} years old </h1>
+            <p>{this.props.children}</p>
             {/* this is call two way binding */}
-            <input type='text'  onChange={props.change} value={props.name}/>
+            <input type='text'  onChange={this.props.change} value={this.props.name}/>
         </div>
     )
+   }
 }
 
-export default Radium(person);
+export default Radium(Person);
 // export default person
