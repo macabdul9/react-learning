@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Aux } from 'react';
 import Radium, {StyleRoot} from 'radium';
 
 import './App.css';
@@ -111,7 +111,6 @@ class App extends Component {
             />
         </div>
       );
-     
     }
     console.log(this.props.title)
 
