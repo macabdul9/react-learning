@@ -1,9 +1,12 @@
-import React, { Component, Aux } from 'react';
+import React, { Component} from 'react';
 import Radium, {StyleRoot} from 'radium';
 
 import './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import Aux from '../hoc/Auxiliary'
+import WithClass from '../hoc/withClass';
+import withClass from '../hoc/withClass'
 
 class App extends Component {
 
@@ -15,13 +18,14 @@ class App extends Component {
   // states, which can be intiized using state
   state = {
     persons : [
-      {id:"jkfv", name:"Waheed", age:22},
+      {id:"jkfv", name:"Ab", age:23},
       {id:"dgjre", name:"Abdul", age:21},
       {id:"sdtghre", name:"Mac", age:20}
     ],
     otherState:"this is some other state",
     showPersons:false,
-    showCockpit:true
+    showCockpit:true,
+    changeCounter:0
   }
 
   static getDerivedStateFromProps(props, state){
@@ -31,9 +35,6 @@ class App extends Component {
 
   componentWillMount(){
     console.log('[App.js] componentWillMount')
-  }
-  componentDidMount(){
-    console.log('[App.js] componentDidMount')
   }
 
   switchNameHandler =(newName)=>{
@@ -68,7 +69,9 @@ class App extends Component {
     persons[personIndex].name =  person.name
 
     // update the state
-    this.setState({persons:persons})
+    this.setState((prevState, props)=>{
+      return {persons:persons, changeCounter:prevState.changeCounter+1}
+    })
 
     // this.setState({persons : [
     //     {name:'Abdul', age:21},
@@ -117,7 +120,9 @@ class App extends Component {
     return (
       //  It is required to wrap it into StyleRoot to work with media query
       <StyleRoot>
-        <div className='App'>
+        {/* <div className='App'> */}
+        {/* <WithClass className='App'> */}
+        <Aux>
           <button onClick={()=>{this.setState({showCockpit:!this.state.showCockpit})}}>Remove Cockpit</button>
           {this.state.showCockpit?
             <Cockpit 
@@ -127,7 +132,9 @@ class App extends Component {
             </Cockpit>
           :null}
           {persons}
-        </div>
+        </Aux>
+        {/* </WithClass>   */}
+        {/* </div> */}
       </StyleRoot>
     );
   }
@@ -135,5 +142,5 @@ class App extends Component {
 
 // class bases component is used for state management
 // functional component for component management
-export default Radium(App);
+export default withClass(Radium(App), 'App');
 // export default App;

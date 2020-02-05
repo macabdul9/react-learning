@@ -1,6 +1,6 @@
-import React from 'react'
-import Person from './Person/Person'
-import Radium from 'radium'
+import React from 'react';
+import Person from './Person/Person';
+import Radium from 'radium';
 
 
 class Persons extends React.Component{
