@@ -21,11 +21,12 @@ class Persons extends React.Component{
   //   console.log('[Persons.js] componentDidUpdate')
   // }
   shouldComponentUpdate(nextProps, nextState){
-    if(nextProps.persons!==this.props.persons){
-      return true;
-    }else{
-      return false;
-    }
+    // if(nextProps.persons!==this.props.persons){
+    //   return true;
+    // }else{
+    //   return false;
+    // }
+    return true
   }
   componentWillUnmount(){
     console.log('[Persons.js] componentWillUnmount')
@@ -40,6 +41,7 @@ class Persons extends React.Component{
         age={person.age}
         key={person.id}
         change={(event)=>this.props.changed(event, person.id)}
+        isAuthenticated={this.props.isAuthenticated}
         ></Person>
   });
   }
