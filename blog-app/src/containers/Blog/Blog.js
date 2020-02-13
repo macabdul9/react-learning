@@ -1,59 +1,40 @@
-import React, { Component } from 'react';
-import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
-import './Blog.css';
-import axios from 'axios';
+import React, { Component } from "react";
+// import axios from 'axios';
+import "./Blog.css";
+
+import Posts from "../Posts/Posts";
+import NewPost from "../NewPost/NewPost";
+
+import { Route, NavLink } from "react-router-dom";
 
 class Blog extends Component {
+  render() {
 
-    state = {
-        posts:[],
-        postSelected:null
-    }
-    componentDidMount(){
-        axios.get('http://jsonplaceholder.typicode.com/posts').then(
-            response => {
-                const posts = response.data.slice(10, 14);
-                const updatedPosts = posts.map(post =>{
-                    return{
-                        ...post,
-                        author:'Abdul'
-                    };
-                });
-            
-                this.setState({posts:updatedPosts})
-            });
-    };
+    return (
+      <div className="Blog">
+        <header>
+          <nav>
+            <ul>
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to={{
+                    pathname: '/new-post',
+                    hash:'#submit',
+                    search:'?quick-submit=true'
+                }}>New Post</NavLink>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        {/* <Route path='/' exact render={()=><h1>Home</h1>} /> */}
+        <Route path="/" exact component={Posts} />
+        <Route path="/new-post" exact component={NewPost} />
 
-    postClickedHandler = (id) => {
-        this.setState({postSelected:id})
-    }
-    
-    render () {
-        let posts = this.state.posts.map(
-            post =>{
-                return <Post 
-                key={post.id} 
-                title={post.title} 
-                author={post.author}
-                clicked = {()=>this.postClickedHandler(post.id)}></Post>
-            }
-        )
-        return (
-            <div>
-                <section className="Posts">
-                    {posts}
-                </section>
-                <section>
-                    <FullPost  id={this.state.postSelected}/>
-                </section>
-                <section>
-                    <NewPost />
-                </section>
-            </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 
 export default Blog;
