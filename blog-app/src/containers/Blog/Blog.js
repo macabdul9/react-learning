@@ -6,7 +6,7 @@ import FullPost from '../FullPost/FullPost';
 import Posts from "../Posts/Posts";
 import NewPost from "../NewPost/NewPost";
 
-import { Route, NavLink, Switch } from "react-router-dom";
+import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 
 class Blog extends Component {
   render() {
