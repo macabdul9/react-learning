@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Document</title>
-</head>
-<body>
-    <div></div>
-</body>
-</html>
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+
+import './index.css';
+import App from './App';
+
+const app = (
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+);
+
+ReactDOM.render(app, document.getElementById('root'));
